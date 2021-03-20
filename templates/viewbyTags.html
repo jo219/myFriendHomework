@@ -1,0 +1,50 @@
+<head>
+  <title>Photos group by tags</title>
+</head>
+
+<body>
+  {% if name %}
+    <h1>Hello {{ name }}!</h1>
+  {% endif %}
+
+  {% if message %}
+    <h4>{{message}}!</h4>
+  {% endif %}
+
+  {% if tags %}
+    {% if checked %}
+      <form method="get" action="/yourOtherPhotos/{{tags}}">
+      <input type="checkbox" name="switch" checked> Check the box if you want to see other people's photos<br />
+      <input type="submit" />
+    {% else %}
+      <form method="POST" action="{{url_for('peoplePhotoswithTag', values=tags)}}">
+      <input type="checkbox" name="switch"> Check the box if you want to see other people's photos<br />
+      <input type="submit" />
+    </form>
+    {% endif %}
+  {% endif %}
+
+  {% if results %}
+    <h4>Here are the tags you searched</h4>
+    {% for result in results%}
+      <li>{{result}}</li>
+    {% endfor %}
+  {% endif %}
+
+  {% if photos %}
+  <h4>Here are the photos</h4>
+  <ul>
+  {% for photo in photos %}
+    <li>
+      <img src='data:image/png;base64, {{photo[0].decode("ascii")}}' width="40%"/><br />
+      <h4>Caption: {{photo[1]}}</h4>
+      <h4>From album: {{photo[2]}}</h4>
+    </li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+
+  <p>
+    <a href='/'>Home</a>
+  </p>
+</body>

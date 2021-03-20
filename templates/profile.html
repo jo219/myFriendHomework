@@ -1,0 +1,22 @@
+<title>Photoshare</title>
+
+{% if name %}
+  <h1>Hello {{ name }}!</h1>
+  <h2>Check out your <a href="/friends">friend list</a></h2>
+{% endif %}
+
+{% if message %}
+  <h4>{{message}}!</h4>
+{% endif %}
+
+{% if message is none %}
+  <p>You should <a href='/login'>login!</a></p>
+{% endif %}
+
+<ul>
+  <li><a href="/albums">View your albums</a></li>
+  <li><a href='/upload'>Upload a photo</a> </li>
+  <li><a href="/youmayalsolike/{{user}}">You may also like these photos</a></li>
+  <li><a href='/logout'>Logout</a></li>
+  <li><a href='/'>Home</a></li>
+</ul>

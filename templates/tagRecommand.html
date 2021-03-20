@@ -1,0 +1,30 @@
+<head>
+  <title>Tag recommandation</title>
+</head>
+
+<body>
+  <form action="/tag/searchResult" method="post">
+    <label for="search">Give us some tags that you have in mind.</label><br>
+    <input type="text" name="search" /><br />
+    <input type="submit" value="Search">
+  </form>
+
+  {% if message %}
+    <h4>{{message}}!</h4>
+  {% endif %}
+
+  {% if tags %}
+  <h4>Here's the recommand tags</h4>
+  <ul>
+    {% for tag in tags %}
+      <li>
+        {{tag[0]}}
+      </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  
+  <p>
+    <a href='/'>Home</a>
+  </p>
+</body>

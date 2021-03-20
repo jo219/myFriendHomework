@@ -1,0 +1,41 @@
+<head>
+  <title>User like this photo</title>
+</head>
+
+<body>
+  {% if name %}
+    <h1>Hello {{ name }}!</h1>
+  {% endif %}
+
+  {% if message %}
+    <h2>{{message}}!</h2>
+  {% endif %}
+
+  {% if users %}
+    <h4>People who like this photo</h4>
+    <ul>
+      {% for user in users%}
+      <li>
+        {{user[0]}}
+      </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if number %}
+    <h4>Number of likes: {{number[0]}}</h4>
+  {% endif %}
+
+  <h4>Do you want to like this photo?</h4><br>  
+  <form method="post" action="/likes/{{photoID}}">
+    {% if liked %}
+      <input type="submit" value="Like!">
+    {% else %}
+      <input type="submit" value="Unlike">
+    {% endif %}
+  </form>
+
+  <p>
+    <a href='/'>Home</a>
+  </p>
+</body>

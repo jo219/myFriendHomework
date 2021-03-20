@@ -1,0 +1,60 @@
+<!-- author ben lawson (balawson@bu.edu) -->
+<!doctype html>
+<title>Photoshare</title>
+{% if name %}
+  <h1>Hello {{ name }}!</h1>
+{% endif %}
+
+{% if message %}
+  <h1>{{message}}!</h1>
+{% endif %}
+
+<h3><a href="/top10Users">Check out the top 10 users in this website.</a></h3>
+<h3><a href="/tags/populartags">Check out the most popular tag in this website</a></h3>
+<p>
+  <form action="{{url_for('showTagsSearchResult')}}" method="post">
+    <label for="search">Search the photos by tags</label>
+    <input type="text" name="search" /><br />
+    <input type="submit" value="Search">
+  </form>
+</p>
+
+<p>
+  <form action="{{url_for('searchComments')}}" method="get">
+    <label for="search">Search all comments with query</label>
+    <input type="text" name="query" /><br />
+    <input type="submit" value="Search">
+  </form>
+</p>
+
+{% if photos %}
+<!-- <h2>Here are your photos</h2> -->
+<h2>Here's all the photos in photoshare</h2>
+    <ul>
+    {% for photo in photos %}
+        <li>
+          <img src='data:image/jpg;base64, {{ photo[1].decode("ascii") }}' width="40%"/>
+          <h4>Caption: {{photo[2]}}</h4>
+          <a href="/tags/{{photo[0]}}">Check out the tags of this photo!</a><br>
+          <a href="/comments/{{photo[0]}}">Check out all the commonts of this photo!</a><br>
+          <a href="/likes/{{photo[0]}}">Check out who like this photo</a>
+          <br>
+          <br>
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% if albums %}
+ <h2>Here's all the albums in photoshare</h2>
+ {% for album in albums %}
+     <li><a href="/photos/{{album[0]}}">{{album[1]}} <br /> Created by user: {{album[2]}}</a><br /></li>
+  {% endfor %}
+{% endif %}
+
+
+{% if message is none %}
+  <p>You should <a href='/login'>login!</a></p>
+{% else %}
+  <p> Go to <a href='/profile'>profile?</a></p>
+{% endif %}

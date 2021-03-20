@@ -1,0 +1,38 @@
+<head>
+  <title>Search Your Friends</title>
+</head>
+
+<body>
+  {% if message %}
+    <h4>{{message}}</h4>
+  {% endif %}
+
+  {% if searchResult %}
+      <ul>
+        {% for user in searchResult %}
+          <li>User email is:{{user[0]}} <br /> User first name is:{{user[1]}} <br /> User last name is:{{user[2]}}<br /></li>
+          <a href="{{url_for('addFriends', values = user[0])}}">Add this person as your friend!</a><br />
+        {% endfor %}
+      </ul>
+      <h4>Want to add another friend? Go search your friends!</h4>
+  {% endif %}
+
+  <form action="{{url_for('searchFriends')}}" method="post">
+    <label for="name">Enter just your friend's first or last name:</label>
+    <input type="search" name="name" /><br />
+    <input type="submit" /><br />
+  </form>
+
+<h4> Reccommendation: Friend of Friend to Add </h4>
+{% if recommendedFriends %}
+  <ul>
+    {% for f in recommendedFriends %}
+      <li> {{ f[1][0] }} {{ f[1][1] }} (have {{ f[0] + 1 }} of mutual friend(s))</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <h5>No recommendation available yet from your friends of friends</h5>
+{% endif %}
+
+  <a href='/'>Home</a>
+</body>

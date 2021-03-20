@@ -1,0 +1,48 @@
+<head>
+  <title>Photos</title>
+</head>
+
+<body>
+  {% if name %}
+    <h1>Hello {{ name }}!</h1>
+  {% endif %}
+
+  {% if albums %}
+    <h2>Here are the photos in {{albums}}</h2>
+  {% endif%}
+
+  {% if message %}
+    <h2>{{message}}!</h2>
+  {% endif %}
+
+  {% if photos %}
+    <ul>
+    {% for photo in photos %}
+      <li>
+        <img src='data:image/png;base64, {{ photo[1].decode("ascii") }}' width="40%"/><br />
+        <h4>Caption: {{photo[2]}}</h4>
+        <a href="/tags/{{photo[0]}}">Check out the tags of this photo!</a><br />
+        <br />
+        <br />
+        <form method="post" action="{{url_for('deletePhoto', values=photo[0], AlbumName=albums)}}">
+          <input type="submit" name="Delete" value="Delete it">
+        </form>
+      </li>
+    {% endfor %}
+    </ul>
+    <p>
+      <a href="/tags/populartags">Check out the popular tags!</a><br />
+    </p>
+    <p>
+      <a href="/profile">Want to add another photo? Go to profile to upload one.</a>
+    </p>
+    {% else %}
+      <h4>Looks like there's no photo in this album.</h4><br />
+      <a href="/profile">Go to upload a photo from your profile.</a>
+  {% endif %}
+
+  <p>
+    <a href='/'>Home</a>
+  </p>
+
+</body>

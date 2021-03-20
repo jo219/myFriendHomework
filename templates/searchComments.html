@@ -1,0 +1,27 @@
+{% if comments %}
+
+<h2> Here the users commenting with this phrase: "{{ query }}"</h2>
+
+<ul>
+	{% for user in users %}
+		<li>{{user[1]}} in {{user[0]}} different comments</li>
+	{% endfor %}
+</ul>
+
+<h3> List of comments with the phrase </h3>
+
+<ul>
+	{% for comment in comments %}
+		<li>"{{comment[1]}}" by {{comment[2]}} on {{comment[3]}}</li>
+	{% endfor %}
+</ul>
+
+{% else %}
+
+<h2> Comments with this phrase "{{ query }}" not found</h2>
+
+{% endif %}
+
+ <p>
+    <a href='/'>Home</a>
+ </p>

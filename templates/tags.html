@@ -1,0 +1,28 @@
+<head>
+  <title>Tags</title>
+</head>
+
+<body>
+  {% if name %}
+    <h1>Hello {{ name }}!</h1>
+  {% endif %}
+
+  {% if message %}
+    <h4>{{message}}!</h4>
+  {% endif %}
+
+  {% if tags %}
+    <h4>Click the tag to see your and other people's photos with this tag</h4>
+    {% for tag in tags %}
+      <li>
+        <a href="/yourOtherPhotos/{{tag}}">{{tag}}</a>
+      </li>
+    {% endfor %}
+  {% else %}
+      <h4>(There's no tag assocaited found)</h4>
+  {% endif %}
+
+  <p>
+    <a href='/'>Home</a>
+  </p>
+</body>

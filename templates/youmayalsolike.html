@@ -1,0 +1,36 @@
+<head>
+  <title>You may also like</title>
+</head>
+
+<body>
+  {% if tags %}
+    <h2>Your top 5 tags</h2>
+    <ul>
+      {% for tag in tags%}
+        <li>{{tag}}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if photos %}
+    <h2>You may also like these photos.</h2>
+    <ul>
+    {% for photo in photos %}
+      <li>
+        <img src='data:image/png;base64, {{photo[1].decode("ascii")}}' width="40%"/><br />
+        <h4>Caption: {{photo[2]}}</h4>
+        <a href="/tags/{{photo[0]}}">Check out the tags of this photo!</a><br />
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if not tags and not photos %}
+    <h3>There is no tag founded on database yet, you can make yours the first</h3>
+  {% endif %}
+
+  <p>
+    <a href='/'>Home</a>
+  </p>
+
+</body>

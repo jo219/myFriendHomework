@@ -1,0 +1,21 @@
+<head>
+  <title>Top10Users</title>
+</head>
+
+<body>
+  <h2>Here's are top 10 user in this website.</h2>
+  {% if results %}
+    <ul>
+      {% for result in results%}
+        <li>
+          User first name:{{result[0]}}<br>
+          User email:{{result[1]}}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <p>
+    <a href='/'>Home</a>
+  </p>
+</body>

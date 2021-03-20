@@ -1,0 +1,51 @@
+<head>
+  <title>Photo Comments</title>
+</head>
+
+<body>
+  {% if name %}
+    <h1>Hello {{ name }}!</h1>
+  {% endif %}
+
+  {% if message %}
+    <h1>{{message}}!</h1>
+  {% endif %}
+
+  {% if addComment %}
+  {% if photoID %}
+  <form action="/leaveComments/{{photoID}}" method="post">
+    <label for="comment">Add a comment</label>
+    <input type="text" name="comment" /><br />
+    <input type="submit">
+  </form>
+  {% endif %}
+  {% endif %}
+
+  {% if comments %}
+  <h4>Here are the comments of this photo</h4>
+  <ul>
+    {% for comment in comments %}
+    <li>
+      <p>
+        Comment Owner: {{comment[1]}}<br>
+        Comment text: {{comment[0]}}<br>
+        Comment date: {{comment[2]}}<br>
+      </p>
+    </li>
+    {% endfor %}
+  </ul>
+  <p>
+    Want to add another comment?<br>
+    <a href="/comments/addComment/{{photoID}}">Click here to add another comment</a>
+  </p>
+  {% else %}
+    <p>
+      There's no comment of this photo yet.<br>
+      <a href="/comments/addComment/{{photoID}}">Click here to add a comment</a>
+    </p>
+  {% endif %}
+
+  <p>
+    <a href='/'>Home</a>
+  </p>
+</body>

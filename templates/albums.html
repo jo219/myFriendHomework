@@ -1,0 +1,36 @@
+<head>
+  <title>Albums</title>
+</head>
+
+<body>
+<h1>Here are your ablums!</h1>
+{% if name %}
+  <h1>Hello {{ name }}!</h1>
+{% endif %}
+
+{% if message %}
+  <h4>{{message}}!</h4>
+{% endif %}
+
+{% if albums %}
+  <ul>
+  {% for album in albums %}
+    <li>
+      <a href="/album/{{album[0]}}">{{album[1]}} <br /> Created by {{album[2]}}</a><br />
+      <form method="post" action="{{url_for('deleteAlbum', values=album[0])}}">
+        <input type="submit" name="Delete" value="Delete it">
+      </form>
+    </li>
+  {% endfor %}
+  </ul>
+  <h4><a href="/createAlbums">Want to create another album?</a></h4>
+{% else %}
+  <h4>Looks like you don't have an album yet.</h4><br />
+  <a href="/createAlbums">Go to Create one.</a>
+{% endif %}
+
+<p>
+  <a href='/'>Home</a>
+</p>
+
+</body>
